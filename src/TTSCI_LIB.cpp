@@ -1,18 +1,33 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <fstream>
 
 #include "../include/TTSCI_LIB.h"
 
- void Font::Print(const std::string input, std::map<char, std::string> font) {
-        for (int row = 0; row < 5; ++row) { // Предполагается, что каждая буква занимает 5 строк
+ void Font::Print(const std::string input, std::map<char, std::string> font, int row, int width)  {
+        for (int i = 0; i < row; ++i) { // Предполагается, что каждая буква занимает 5 строк
             for (char c : input) {
                 if ((font.find(static_cast<char>(toupper(c))) != font.end())) {
-                    std::cout <<font.at(static_cast<char>(toupper(c))).substr(row * 6, 5) << " \t"; // 6 — ширина буквы + пробел
+                    std::cout <<font.at(static_cast<char>(toupper(c))).substr(i * (width+1), width) << " \t"; //!! 6 — ширина буквы + пробел
                 } else {
                     std::cout << "     "; // Пробел для недоступных символов
                 }
             }
-            printf("\n"); 
+            std::cout << std::endl; 
         }
     }
+
+void Font::PrintToFile(const std::string input, std::map<char, std::string> font , int row,int width, std::fstream &file) {
+    for (int i = 0; i < row; ++i) { 
+            for (char c : input) {
+                if ((font.find(static_cast<char>(toupper(c))) != font.end())) {
+                    file <<font.at(static_cast<char>(toupper(c))).substr(i * (width+1), width) << " \t"; //!! 6 — ширина буквы + пробел
+                } else {
+                    file << "     "; // Пробел для недоступных символов
+                }
+            }
+           file << "\n"; 
+        }
+
+}

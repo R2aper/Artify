@@ -4,14 +4,14 @@
 
 #include "../include/TTSCI_LIB.h"
 
-class Default:public Font {
+class ABC:public Font {
 private:
  std::map<char , std::string> FontLetter;
  int row;
  int width;
 
 public:
-    Default();
+    ABC();
 
     std::map<char, std::string> GetFont(); 
 

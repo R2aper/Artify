@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.13)
 project(TTASCI VERSION 1.0 LANGUAGES CXX)
 
 add_compile_options(
-    -Werror
+    #-Werror
 
     -Wall
     -Wextra
@@ -26,9 +26,16 @@ add_compile_options(
 set(SOURCE_EXE src/main.cpp)
 set(SOURCE_LIB src/TTSCI_LIB.cpp)			
 set(SOURCE_DEFAULT src/fonts/default.cpp)
+set(SOURCE_REGULAR src/fonts/regular.cpp)
+set(SOURCE_ABC src/fonts/abc.cpp)
+
 add_library(TTASCI_LIB ${SOURCE_LIB} include/TTSCI_LIB.h)	
 add_library(DEFAULT ${SOURCE_DEFAULT} fonts/default.h) 
+add_library(REGULAR ${SOURCE_REGULAR} fonts/regular.h)
+add_library(ABC ${SOURCE_ABC} fonts/abc.h)
+
 target_include_directories(TTASCI_LIB PUBLIC include)
 target_include_directories(DEFAULT PUBLIC fonts)
+
 add_executable(TTASCI ${SOURCE_EXE})
-target_link_libraries(TTASCI TTASCI_LIB DEFAULT)
+target_link_libraries(TTASCI TTASCI_LIB DEFAULT REGULAR ABC)
