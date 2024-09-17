@@ -58,10 +58,10 @@ ABC::ABC() {
         return FontLetter;
 }
 
-int ABC::getRow() {
-    return row;
+    unsigned int ABC::getRow() {
+        return row;
 }
 
-int ABC::getWidth() {
-    return width;
+    unsigned int ABC::getWidth() {
+        return width;
 }

@@ -7,15 +7,15 @@
 class Default:public Font {
 private:
  std::map<char , std::string> FontLetter;
- int row;
- int width;
+ unsigned int row;
+ unsigned int width;
 
 public:
     Default();
 
     std::map<char, std::string> GetFont(); 
 
-    int getRow();
-    int getWidth();
+    unsigned int getRow();
+    unsigned int getWidth();
 
 };

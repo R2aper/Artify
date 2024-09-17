@@ -6,7 +6,6 @@
 /*           Fonts              */
 #include "../include/TTSCI_LIB.h"
 #include "../fonts/default.h"
-#include "../fonts/regular.h"
 #include "../fonts/abc.h"
 
 /*
@@ -22,15 +21,6 @@ Shady(
    ___ \ 
  _/    _\                       
 )
-
-Надо разобратся с выводом специальных сиволов Regular(
- █████╗ 
-██╔══██╗
-███████║
-██╔══██║
-██║  ██║
-╚═╝  ╚═╝
- )
 
 Tiny(
  /\ 
@@ -103,11 +93,6 @@ int main(int argc, char *argv[]) {
                 printf("File is not found!\n");
                 return 1;
             }}
-
-        if(strcmp(argv[i],"--regular") == 0) {
-            // Regular font;
-            // a.Print(argv[i], a.GetFont());
-        }
 
         if(strcmp(argv[i],"--tiny") == 0) {
         // Tiny font;

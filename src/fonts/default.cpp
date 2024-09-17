@@ -58,10 +58,10 @@ Default::Default() {
         return FontLetter;
 }
 
-int Default::getRow() {
+unsigned int Default::getRow() {
     return row;
 }
 
-int Default::getWidth() {
+unsigned int Default::getWidth() {
     return width;
 }
