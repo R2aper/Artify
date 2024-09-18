@@ -29,5 +29,6 @@ void Font::PrintToFile(const std::string input, std::map<char, std::string> font
             }
            file << "\n"; 
         }
+    file.close();
 
 }
