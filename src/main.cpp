@@ -1,39 +1,27 @@
-#include <iostream>
-#include <string>
 #include <cstring>
 #include <fstream>
+#include <iostream>
+#include <string>
 
 /*           Fonts              */
-#include "../include/TTSCI_LIB.h"
-#include "../fonts/default.h"
 #include "../fonts/abc.h"
+#include "../fonts/default.h"
+#include "../fonts/shady.h"
+#include "../fonts/tiny.h"
+#include "../include/TTSCI_LIB.h"
 
 /*
 TODO:
-https://textfancy.com/text-art/
-- Исправить баги 
-- Передалать метод Print
-- Изучить std::map
-- Добавить больше шрифтов:
-Shady(
-     \   
-    _ \  
-   ___ \ 
- _/    _\                       
-)
+*Переписать функцию IsValidFont
+*Написать тесты
+*Написать README
 
-Tiny(
- /\ 
-/--\
-)
-
-- Раозобратся с git
 */
 
 void usage() {
-    printf("TTSCI - Generate ASCII art from text     \n\nUsage: TTSCI [options] <text> \n\
+  printf("TTSCI - Generate ASCII art from text     \n\nUsage: TTSCI [options] <text> \n\
 Options: \n\
- -h or --help                     Show this help \n\
+ -h                               Show this help \n\
  --abc <text>                     Display Ascii art from text with ABC font\n\
  --shady <text>                   Display Ascii art from text with Shady font\n\
  --tiny  <text>                   Display Ascii art from text with Tiny font\n\
@@ -41,117 +29,90 @@ Options: \n\
  -tf <path to file> <text>        Display Ascii art from text with default font to file");
 }
 
-
-std::string GetTextFromFile(std::fstream &file) {
-    std::string input,line;
-    while (std::getline(file, line)) {
-        input += line;
-    }
-    file.close();
-    return input;
-}
-
-
-
 int main(int argc, char *argv[]) {
-    if(argc < 2 ) {
+  if (argc < 2) {
+    usage();
+    return 1;
+  }
+  std::string OptionFonts[4] = {"--d", "--shady", "--tiny", "--abc"};
+
+  std::map<std::string, Font> Fonts = {{OptionFonts[0], Default()},
+                                       {OptionFonts[1], Shady()},
+                                       {OptionFonts[2], Tiny()},
+                                       {OptionFonts[3], ABC()}};
+
+  Font Font;
+  bool FromFileFlag = false, ToFileFlag = false, IsDefaultFont = true;
+
+  for (int i = 1; i < argc; i++) {
+    if (argv[i][0] == '-') {
+      std::string option = argv[i];
+
+      if (option == "-h") {
         usage();
-        return 1;  
-    }
+        return 0;
+      }
 
-bool FromFileFlag = false,
-ToFileFlag = false, 
-ABCFont = false;
-//bool ShadyFont = false;
-//bool TinyFont = false;
+      if (option == "-tf") {
+        ToFileFlag = true;
+        continue;
+      }
 
-    for(int i = 1 ; i < argc; i++) {
-        if(argv[i][0] == '-') {
+      if (option == "-ff") {
+        FromFileFlag = true;
+        continue;
+      }
 
-            if(argv[i][1] == 'h' || (argv[i][1] == '-' && argv[i][2] == 'h' && argv[i][3] == 'e' && argv[i][4] == 'l' && argv[i][5] == 'p')) {
-                usage();
-                return 0; 
-            }
-           
-            if(argv[i][1] == 'f' && argv[i][2] == 'f') FromFileFlag = true;
-            if(argv[i][1] == 't' && argv[i][2] == 'f') ToFileFlag = true;
-            if(argv[i][1] == '-' && argv[i][2] == 'a' && argv[i][3] == 'b' && argv[i][4] == 'c') ABCFont = true;
-            /*
-            if(argv[i][1] == '-' && argv[i][2] == 's' && argv[i][3] == 'h' && argv[i][4] == 'a' && argv[i][5] == 'd' && argv[i][6] == 'y') ShadyFont = true;
-            if(argv[i][1] == '-' && argv[i][2] == 't' && argv[i][3] == 'i' && argv[i][4] == 'n' && argv[i][5] == 'y') TinyFont = true;
-            */
-            if(!ABCFont && !FromFileFlag && !ToFileFlag) {
-                printf("Unknown option: %s\n", argv[i]);
-                return 1;
-            }
+      Font = Fonts[option];
 
-        } else {
+      if (IsValidFont(option, OptionFonts) && !FromFileFlag && !ToFileFlag) { //!
+        std::cerr << "Unknown option: " << option << std::endl;
+        return 1;
+      }
 
-            if(FromFileFlag && i <= argc) {
-                std::fstream file;
-                file.open(argv[i]);
+      IsDefaultFont = false;
 
-                if(!file.is_open()) {
-                    printf("File is not found!\n");
-                    return 1;
-                }
+    } else {
 
-                std::string input = GetTextFromFile(file);
+      if (IsDefaultFont)
+        Font = Default();
 
-                Default font;
-                font.Print(input, font.GetFont(),font.getRow(),font.getWidth());
+      if (FromFileFlag) {
+        std::fstream file;
+        file.open(argv[i]);
 
-                return 0;
-            }
-              
-            if(ToFileFlag && i+1 <= argc) {
-                std::fstream file;
-                file.open(argv[i]);
-
-                if(!file.is_open()) {
-                    printf("File is not found!\n");
-                    return 1;
-                }
-
-                Default font;
-                font.PrintToFile(argv[i+1], font.GetFont(),font.getRow(),font.getWidth(),file);
-
-                return 0;
-            }
-
-            /*
-            if(ShadyFont && i+1 <= argc) {
-                Shady a;
-                a.Print(argv[i], a.GetFont(),a.getRow(),a.getWidth());
-
-                return 0;
-            }
-
-            if(TinyFont && i+1 <= argc) {
-                Tiny a;
-                a.Print(argv[i], a.GetFont(),a.getRow(),a.getWidth());
-
-                return 0;
-            }
-           
-            */
-            if(ABCFont && i+1 <= argc) {
-                ABC font;
-                font.Print(argv[i], font.GetFont(),font.getRow(),font.getWidth());
-
-                return 0;
-            } 
-
-            if(!ABCFont && !FromFileFlag && !ToFileFlag) {
-                Default font;
-                font.Print(argv[i], font.GetFont(),font.getRow(),font.getWidth());
-
-                return 0;
-            }
-
+        if (!file.is_open()) {
+          printf("File is not found!\n");
+          return 1;
         }
-    
-    }
 
-    return 0;
+        std::string input = GetTextFromFile(file);
+        Font.Print(input, Font.GetFont(), Font.getRow(), Font.getWidth());
+
+        return 0;
+      }
+
+      if (ToFileFlag) {
+        if (i + 1 >= argc) {
+          usage();
+          return 1;
+        }
+        std::fstream file;
+        file.open(argv[i]);
+
+        if (!file.is_open()) {
+          printf("File is not found!\n");
+          return 1;
+        }
+
+        Font.PrintToFile(argv[i + 1], Font.GetFont(), Font.getRow(), Font.getWidth(), file);
+
+        return 0;
+      }
+
+      Font.Print(argv[i], Font.GetFont(), Font.getRow(), Font.getWidth());
+    }
+  }
+
+  return 0;
 }
