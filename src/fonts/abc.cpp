@@ -1,9 +1,6 @@
-#include <iostream>
 #include <map>
-#include <string>
 
-#include "../../fonts/abc.h"
-#include "../../include/TTSCI_LIB.h"
+#include "../../fonts/abc.hpp"
 
 ABC::ABC() {
   ABC::row = 5;

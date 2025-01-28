@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.13)
 
-project(TTASCI VERSION 1.0 LANGUAGES CXX)
+project(artify VERSION 1.0 LANGUAGES CXX)
 
 add_compile_options(
     -Werror
@@ -24,20 +24,20 @@ add_compile_options(
 )
 
 set(SOURCE_EXE src/main.cpp)
-set(SOURCE_LIB src/TTSCI_LIB.cpp)			
+set(SOURCE_LIB src/libartify.cpp)			
 set(SOURCE_DEFAULT src/fonts/default.cpp)
 set(SOURCE_ABC src/fonts/abc.cpp)
 set(SOURCE_TINY src/fonts/tiny.cpp)
 set(SOURCE_SHADY src/fonts/shady.cpp)
 
-add_library(TTASCI_LIB ${SOURCE_LIB} include/TTSCI_LIB.h)	
-add_library(DEFAULT ${SOURCE_DEFAULT} fonts/default.h) 
-add_library(ABC ${SOURCE_ABC} fonts/abc.h)
-add_library(TINY ${SOURCE_TINY} fonts/tiny.h)
-add_library(SHADY ${SOURCE_SHADY} fonts/shady.h)
+add_library(LIBARTIFY ${SOURCE_LIB} include/libartify.hpp)	
+add_library(DEFAULT ${SOURCE_DEFAULT} fonts/default.hpp) 
+add_library(ABC ${SOURCE_ABC} fonts/abc.hpp)
+add_library(TINY ${SOURCE_TINY} fonts/tiny.hpp)
+add_library(SHADY ${SOURCE_SHADY} fonts/shady.hpp)
 
-target_include_directories(TTASCI_LIB PUBLIC include)
+target_include_directories(LIBARTIFY PUBLIC include)
 target_include_directories(DEFAULT PUBLIC fonts)
 
-add_executable(TTASCI ${SOURCE_EXE})
-target_link_libraries(TTASCI TTASCI_LIB DEFAULT ABC TINY SHADY)
+add_executable(artify ${SOURCE_EXE})
+target_link_libraries(artify LIBARTIFY DEFAULT ABC TINY SHADY)

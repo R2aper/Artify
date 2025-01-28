@@ -1,9 +1,6 @@
-#include <iostream>
 #include <map>
-#include <string>
 
-#include "../../fonts/tiny.h"
-#include "../../include/TTSCI_LIB.h"
+#include "../../fonts/tiny.hpp"
 
 Tiny::Tiny() {
   Tiny::row = 3;

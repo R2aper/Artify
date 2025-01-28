@@ -1,9 +1,6 @@
-#include <iostream>
 #include <map>
-#include <string>
 
-#include "../../fonts/default.h"
-#include "../../include/TTSCI_LIB.h"
+#include "../../fonts/default.hpp"
 
 Default::Default() {
   Default::row = 5;

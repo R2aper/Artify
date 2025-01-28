@@ -4,11 +4,11 @@
 #include <string>
 
 /*           Fonts              */
-#include "../fonts/abc.h"
-#include "../fonts/default.h"
-#include "../fonts/shady.h"
-#include "../fonts/tiny.h"
-#include "../include/TTSCI_LIB.h"
+#include "../fonts/abc.hpp"
+#include "../fonts/default.hpp"
+#include "../fonts/shady.hpp"
+#include "../fonts/tiny.hpp"
+#include "../include/libartify.hpp"
 
 /*
 TODO:
@@ -19,7 +19,7 @@ TODO:
 */
 
 void usage() {
-  printf("TTSCI - Generate ASCII art from text     \n\nUsage: TTSCI [options] <text> \n\
+  printf("Artify - Generate ASCII art from text     \n\nUsage: TTSCI [options] <text> \n\
 Options: \n\
  -h                               Show this help \n\
  --abc <text>                     Display Ascii art from text with ABC font\n\

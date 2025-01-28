@@ -1,9 +1,6 @@
-#include <iostream>
 #include <map>
-#include <string>
 
-#include "../../fonts/shady.h"
-#include "../../include/TTSCI_LIB.h"
+#include "../../fonts/shady.hpp"
 
 Shady::Shady() {
   Shady::row = 4;

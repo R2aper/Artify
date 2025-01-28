@@ -1,9 +1,6 @@
 #pragma once
 
-#include <map>
-#include <string>
-
-#include "../include/TTSCI_LIB.h"
+#include "../include/libartify.hpp"
 
 class Default : public Font {
 public:

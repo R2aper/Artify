@@ -3,7 +3,7 @@
 #include <map>
 #include <string>
 
-#include "../include/TTSCI_LIB.h"
+#include "../include/libartify.hpp"
 
 std::string GetTextFromFile(std::fstream &file) {
   std::string input, line;
