@@ -1,6 +1,6 @@
-#include "libartify.hpp"
+#include "default.hpp"
 
-class Tiny : public Font {
+class Tiny : public Default {
 public:
   Tiny();
 };

@@ -1,9 +1,9 @@
 #ifndef ABC_HPP
 #define ABC_HPP
 
-#include "libartify.hpp"
+#include "default.hpp"
 
-class ABC : public Font {
+class ABC : public Default {
 public:
   ABC();
 };

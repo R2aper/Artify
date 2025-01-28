@@ -1,4 +1,7 @@
+#include <fstream>
+#include <iostream>
 #include <map>
+#include <string>
 
 #include "default.hpp"
 
@@ -50,3 +53,36 @@ Default::Default() {
   FontLetter[':'] = "       \n   *   \n       \n   *   \n       \n";
   FontLetter['^'] = "   *   \n  * *  \n *   * \n       \n       \n";
 }
+
+void Default::Print(const std::string input, std::map<char, std::string> font, unsigned int row,
+                    unsigned int width) {
+  for (unsigned int i = 0; i < row; ++i) {
+    for (char c : input) {
+      if ((font.find(static_cast<char>(toupper(c))) != font.end())) {
+        std::cout << font.at(static_cast<char>(toupper(c))).substr(i * (width + 1), width) << " ";
+      } else {
+        std::cout << "     ";
+      }
+    }
+    std::cout << std::endl;
+  }
+}
+
+void Default::PrintToFile(const std::string input, std::map<char, std::string> font,
+                          unsigned int row, unsigned int width, std::fstream &file) {
+  for (unsigned int i = 0; i < row; ++i) {
+    for (char c : input) {
+      if ((font.find(static_cast<char>(toupper(c))) != font.end())) {
+        file << font.at(static_cast<char>(toupper(c))).substr(i * (width + 1), width) << " ";
+      } else {
+        file << "     ";
+      }
+    }
+    file << "\n";
+  }
+  file.close();
+}
+
+std::map<char, std::string> Default::GetFont() { return FontLetter; }
+unsigned int Default::getRow() { return row; }
+unsigned int Default::getWidth() { return width; }

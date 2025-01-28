@@ -34,15 +34,13 @@ int main(int argc, char *argv[]) {
     usage();
     return 1;
   }
-  std::string OptionFonts[4] = {"--d", "--shady", "--tiny", "--abc"};
+  std::string OptionFonts[3] = {"--shady", "--tiny", "--abc"};
 
-  std::map<std::string, Font> Fonts = {{OptionFonts[0], Default()},
-                                       {OptionFonts[1], Shady()},
-                                       {OptionFonts[2], Tiny()},
-                                       {OptionFonts[3], ABC()}};
+  std::map<std::string, Default> Fonts = {
+      {OptionFonts[0], Shady()}, {OptionFonts[1], Tiny()}, {OptionFonts[2], ABC()}};
 
-  Font Font;
-  bool FromFileFlag = false, ToFileFlag = false, IsDefaultFont = true;
+  Default Font;
+  bool FromFileFlag = false, ToFileFlag = false;
 
   for (int i = 1; i < argc; i++) {
     if (argv[i][0] == '-') {
@@ -70,13 +68,7 @@ int main(int argc, char *argv[]) {
         return 1;
       }
 
-      IsDefaultFont = false;
-
     } else {
-
-      if (IsDefaultFont)
-        Font = Default();
-
       if (FromFileFlag) {
         std::fstream file;
         file.open(argv[i]);

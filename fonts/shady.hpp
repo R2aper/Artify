@@ -1,9 +1,9 @@
 #ifndef SHADY_HPP
 #define SHADY_HPP
 
-#include "libartify.hpp"
+#include "default.hpp"
 
-class Shady : public Font {
+class Shady : public Default {
 public:
   Shady();
 };
