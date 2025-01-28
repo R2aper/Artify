@@ -1,6 +1,6 @@
 #include <map>
 
-#include "../../fonts/shady.hpp"
+#include "shady.hpp"
 
 Shady::Shady() {
   Shady::row = 4;

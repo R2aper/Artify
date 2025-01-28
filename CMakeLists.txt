@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.13)
 
 project(artify VERSION 1.0 LANGUAGES CXX)
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
 add_compile_options(
     -Werror
 
@@ -23,21 +26,18 @@ add_compile_options(
     -Wsign-promo
 )
 
-set(SOURCE_EXE src/main.cpp)
-set(SOURCE_LIB src/libartify.cpp)			
-set(SOURCE_DEFAULT src/fonts/default.cpp)
-set(SOURCE_ABC src/fonts/abc.cpp)
-set(SOURCE_TINY src/fonts/tiny.cpp)
-set(SOURCE_SHADY src/fonts/shady.cpp)
+if (WIN32)
+    # Настройки для Windows
+    add_definitions(-DWIN32)
+elseif (UNIX)
+    # Настройки для Unix-подобных систем
+    add_definitions(-DUNIX)
+endif()
 
-add_library(LIBARTIFY ${SOURCE_LIB} include/libartify.hpp)	
-add_library(DEFAULT ${SOURCE_DEFAULT} fonts/default.hpp) 
-add_library(ABC ${SOURCE_ABC} fonts/abc.hpp)
-add_library(TINY ${SOURCE_TINY} fonts/tiny.hpp)
-add_library(SHADY ${SOURCE_SHADY} fonts/shady.hpp)
+include_directories(include)
+include_directories(fonts)
 
-target_include_directories(LIBARTIFY PUBLIC include)
-target_include_directories(DEFAULT PUBLIC fonts)
+aux_source_directory(src SOURCES)
+aux_source_directory(src/fonts SOURCES_FONTS)
 
-add_executable(artify ${SOURCE_EXE})
-target_link_libraries(artify LIBARTIFY DEFAULT ABC TINY SHADY)
+add_executable(${PROJECT_NAME} ${SOURCES} ${SOURCES_FONTS})

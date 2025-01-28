@@ -1,8 +1,11 @@
-#pragma once
+#ifndef SHADY_HPP
+#define SHADY_HPP
 
-#include "../include/libartify.hpp"
+#include "libartify.hpp"
 
 class Shady : public Font {
 public:
   Shady();
 };
+
+#endif // SHADY_HPP

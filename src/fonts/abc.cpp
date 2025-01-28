@@ -1,6 +1,6 @@
 #include <map>
 
-#include "../../fonts/abc.hpp"
+#include "abc.hpp"
 
 ABC::ABC() {
   ABC::row = 5;

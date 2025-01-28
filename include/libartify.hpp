@@ -1,4 +1,5 @@
-#pragma once
+#ifndef LIBARTIFY_HPP
+#define LIBARTIFY_HPP
 
 #include <fstream>
 #include <map>
@@ -23,3 +24,5 @@ public:
   unsigned int getRow();
   unsigned int getWidth();
 };
+
+#endif // LIBARTIFY_HPP

@@ -1,6 +1,6 @@
 #include <map>
 
-#include "../../fonts/default.hpp"
+#include "default.hpp"
 
 Default::Default() {
   Default::row = 5;

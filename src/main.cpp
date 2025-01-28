@@ -4,11 +4,11 @@
 #include <string>
 
 /*           Fonts              */
-#include "../fonts/abc.hpp"
-#include "../fonts/default.hpp"
-#include "../fonts/shady.hpp"
-#include "../fonts/tiny.hpp"
-#include "../include/libartify.hpp"
+#include "abc.hpp"
+#include "default.hpp"
+#include "libartify.hpp"
+#include "shady.hpp"
+#include "tiny.hpp"
 
 /*
 TODO:

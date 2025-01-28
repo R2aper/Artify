@@ -1,6 +1,6 @@
 #include <map>
 
-#include "../../fonts/tiny.hpp"
+#include "tiny.hpp"
 
 Tiny::Tiny() {
   Tiny::row = 3;

@@ -1,6 +1,4 @@
-#pragma once
-
-#include "../include/libartify.hpp"
+#include "libartify.hpp"
 
 class Tiny : public Font {
 public:
