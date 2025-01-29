@@ -1,7 +1,4 @@
-#include <fstream>
 #include <iostream>
-#include <map>
-#include <string>
 
 #include "default.hpp"
 
@@ -54,7 +51,7 @@ Default::Default() {
   FontLetter['^'] = "   *   \n  * *  \n *   * \n       \n       \n";
 }
 
-void Default::Print(const std::string input, std::map<char, std::string> font, unsigned int row,
+void Default::Print(const std::string &input, std::map<char, std::string> font, unsigned int row,
                     unsigned int width) {
   for (unsigned int i = 0; i < row; ++i) {
     for (char c : input) {
@@ -68,7 +65,7 @@ void Default::Print(const std::string input, std::map<char, std::string> font, u
   }
 }
 
-void Default::PrintToFile(const std::string input, std::map<char, std::string> font,
+void Default::PrintToFile(const std::string &input, std::map<char, std::string> font,
                           unsigned int row, unsigned int width, std::fstream &file) {
   for (unsigned int i = 0; i < row; ++i) {
     for (char c : input) {

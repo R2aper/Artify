@@ -1,5 +1,3 @@
-#include <map>
-
 #include "tiny.hpp"
 
 Tiny::Tiny() {

@@ -1,5 +1,3 @@
-#include <map>
-
 #include "shady.hpp"
 
 Shady::Shady() {
